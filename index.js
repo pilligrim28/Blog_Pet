@@ -2,11 +2,13 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
+import {registerValidation} from './validations/auth.js'
+
 mongoose
-.connect('mongodb+srv://jobanikolaev:Batyrevo1@myblog.j9ox3.mongodb.net/?retryWrites=true&w=majority&appName=MyBlog')
-.then(() => console.log('DB ok'))
-.catch(()=>console.log('DB Error',err));
- 
+    .connect('mongodb+srv://jobanikolaev:Batyrevo1@myblog.j9ox3.mongodb.net/?retryWrites=true&w=majority&appName=MyBlog')
+    .then(() => console.log('DB ok'))
+    .catch(() => console.log('DB Error', err));
+
 
 
 
@@ -17,20 +19,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-app.post('/auth/login', (req, res) => {
-    console.log(req.body);
-const token = jwt.sign({
-    email: req.body.email,
-    fullName: 'Вася Пупкин'
-},
-'secret123456',
-)
+app.post('/auth/register', registerValidation, (req, res) => {
 
-    res.json({
-        success: true,
-        token,
-
-    })
 });
 
 
