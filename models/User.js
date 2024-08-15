@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const UserScheme = new mangoose.Scheme({
+const UserScheme = new mongoose.Scheme({
     fullName: {
         type: String,
         required: true,
@@ -16,9 +16,9 @@ const UserScheme = new mangoose.Scheme({
     },
     avatarUrl: String,
 },
-{
-timestamps: true,
-},
+    {
+        timestamps: true,
+    },
 
 );
 export default mongoose.model('User', UserScheme);
